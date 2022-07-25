@@ -75,7 +75,9 @@ VALUES
 CREATE TABLE IF NOT EXISTS SpotifyClone.Followers(
     user_id INT NOT NULL,
     artist_id INT NOT NULL,
-    CONSTRAINT PRIMARY KEY (user_id, artist_id)
+    CONSTRAINT PRIMARY KEY (user_id, artist_id),
+    FOREIGN KEY (user_id) REFERENCES SpotifyClone.User(user_id),
+    FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artist_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Followers (user_id, artist_id)
@@ -158,7 +160,9 @@ CREATE TABLE IF NOT EXISTS SpotifyClone.Reprodution(
     user_id INT NOT NULL,
     song_id INT NOT NULL,
     reprodution_date_song DATETIME NOT NULL,
-    CONSTRAINT PRIMARY KEY (user_id, song_id)
+    CONSTRAINT PRIMARY KEY (user_id, song_id),
+    FOREIGN KEY (user_id) REFERENCES SpotifyClone.User(user_id),
+    FOREIGN KEY (song_id) REFERENCES SpotifyClone.Songs(song_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Reprodution (user_id, song_id, reprodution_date_song)
