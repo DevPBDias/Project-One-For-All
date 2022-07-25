@@ -1,8 +1,9 @@
+DROP DATABASE IF EXISTS SpotifyClone;
 
-CREATE DATABASE SpotifyClone;
+CREATE DATABASE IF NOT EXISTS SpotifyClone;
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.Artists(
-    artist_id INT AUTO_INCREMENT PRIMARY KEY,
+    artist_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name_artist VARCHAR(50) NOT NULL
 ) engine = InnoDB;
 
@@ -16,10 +17,11 @@ VALUES
   ("Fog");
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.Albums(
-    album_id INT AUTO_INCREMENT PRIMARY KEY,
-    name_album VARCHAR(100) NOT NULL,
-    FOREIGN KEY (artist_id) REFERENCES Artists(artist_id),
-    release_date INT NOT NULL
+    album_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name_album VARCHAR(50) NOT NULL,
+    artist_id INT NOT NULL,
+    release_date YEAR NOT NULL,
+    FOREIGN KEY (artist_id) REFERENCES SpotifyClone.Artists(artist_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Albums (name_album, artist_id, release_date)
@@ -36,9 +38,9 @@ VALUES
   ("Apparatus", 6, 2015);
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.Plans(
-    plan_id INT AUTO_INCREMENT PRIMARY KEY,
-    name_plan VARCHAR(100) NOT NULL,
-    value_plan DECIMAL(3,2) NOT NULL
+    plan_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name_plan VARCHAR(50) NOT NULL,
+    value_plan DECIMAL(5,2) NOT NULL
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Plans (name_plan, value_plan)
@@ -49,11 +51,12 @@ VALUES
   ("pessoal", 6.99);
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.User(
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    name_user VARCHAR(100) NOT NULL,
+    user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name_user VARCHAR(50) NOT NULL,
     age_user INT NOT NULL,
-    FOREIGN KEY (plan_id) REFERENCES Plan_Values(plan_id),
-    date_subscription_user VARCHAR(10) NOT NULL
+    plan_id INT NOT NULL,
+    date_subscription_user DATE NOT NULL,
+    FOREIGN KEY (plan_id) REFERENCES SpotifyClone.Plans(plan_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.User (name_user, age_user, plan_id, date_subscription_user)
@@ -70,9 +73,9 @@ VALUES
   ("Paul", 46, 2, "2017-01-17");
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.Followers(
-    follow_id INT AUTO_INCREMENT PRIMARY KEY,
-    FOREIGN KEY (user_id) REFERENCES User_Info(user_id),
-    FOREIGN KEY (artist_id) REFERENCES Artists(artist_id)
+    user_id INT NOT NULL,
+    artist_id INT NOT NULL,
+    CONSTRAINT PRIMARY KEY (user_id, artist_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Followers (user_id, artist_id)
@@ -101,11 +104,11 @@ VALUES
   (10, 6);
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.Songs(
-    song_id INT AUTO_INCREMENT PRIMARY KEY,
-    name_song VARCHAR(100) NOT NULL,
+    song_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name_song VARCHAR(50) NOT NULL,
     song_duration_seconds INT NOT NULL,
-    FOREIGN KEY (album_id) REFERENCES Albums(album_id),
-    FOREIGN KEY (release_id) REFERENCES Release_Date(release_id)
+    album_id INT NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES SpotifyClone.Albums(album_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Songs (name_song, song_duration_seconds, album_id)
@@ -152,10 +155,10 @@ VALUES
   ("You Make Me Feel So..", 83, 10);
 
 CREATE TABLE IF NOT EXISTS SpotifyClone.Reprodution(
-    reprodution_id INT AUTO_INCREMENT PRIMARY KEY,
-    reprodution_date_song VARCHAR(20) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User_Info(user_id),
-    FOREIGN KEY (song_id) REFERENCES Songs_Info(song_id),
+    user_id INT NOT NULL,
+    song_id INT NOT NULL,
+    reprodution_date_song DATETIME NOT NULL,
+    CONSTRAINT PRIMARY KEY (user_id, song_id)
 ) engine = InnoDB;
 
 INSERT INTO SpotifyClone.Reprodution (user_id, song_id, reprodution_date_song)
