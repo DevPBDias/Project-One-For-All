@@ -1,10 +1,12 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+## BreadcrumbsProject-One-For-All
+
+- Projeto do módulo de Back-end da Trybe.
+- Objetivo do projeto: Normalizar uma tabela na terceira forma normal e acessar as informações desta tabela através de queries utilizando SQL.
+- - Utilizará uma tabela não normalizada que deverá ser normalizada e populada para executar queries com o intuito de encontrar as informações solicitadas.
+
+## Tecnologias:
+<div>
+  <img src='https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white'/>
+  <img src='https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white'/>
+  <img src='https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white'/>
+</div>
